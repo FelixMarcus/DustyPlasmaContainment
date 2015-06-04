@@ -8,9 +8,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import particles.Particle;
+import structures.AccelerationVector;
 import structures.CartesianPosition;
 import structures.ForceVector;
 import structures.Vector;
+import structures.VelocityVector;
 
 public class ParticleTests {
 
@@ -25,7 +27,7 @@ public class ParticleTests {
 	public void testDefaultParticleCreation(){
 		assertEquals(particle.mass(), BigDecimal.valueOf(1));
 		assertEquals(particle.position(), new CartesianPosition(0, 0));
-		assertEquals(particle.velocity(), BigDecimal.valueOf(0));
+		assertEquals(particle.velocity(), new VelocityVector(0,0));
 		assertEquals(particle.charge(), BigDecimal.valueOf(0));
 		assertEquals(particle.forces(), new ForceVector(0,0));
 		assertEquals(particle.acceleration(), new AccelerationVector(0, 0));	
@@ -62,5 +64,17 @@ public class ParticleTests {
 		particle.addForce(testForce);
 		AccelerationVector testAcceleration = new AccelerationVector(5,5);
 		assertEquals(particle.acceleration(), testAcceleration);
+	}
+	
+	@Test
+	public void testParticleVelocity(){
+		ForceVector testForce = new ForceVector(5, 5);
+		BigDecimal testTime = BigDecimal.valueOf(1);
+		VelocityVector testVelocity = new VelocityVector(5, 5);
+		
+		particle.addForce(testForce);
+		particle.accelerateFor(testTime);
+		
+		assertEquals(testVelocity, particle.velocity());
 	}
 }

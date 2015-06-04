@@ -2,8 +2,6 @@ package structures;
 
 import java.math.BigDecimal;
 
-import particles.tests.AccelerationVector;
-
 public class ForceVector extends Vector {
 
 	public ForceVector(BigDecimal x, BigDecimal y) {

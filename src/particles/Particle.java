@@ -2,21 +2,24 @@ package particles;
 
 import java.math.BigDecimal;
 
-import particles.tests.AccelerationVector;
+import structures.AccelerationVector;
 import structures.CartesianPosition;
 import structures.ForceVector;
 import structures.Vector;
+import structures.VelocityVector;
 
 public class Particle {
 
 	private BigDecimal mass;
 	private Vector position;
 	private ForceVector force;
+	private VelocityVector velocity;
 
 	public Particle() {
 		mass = BigDecimal.ONE;
 		position = new CartesianPosition(0, 0);
 		force = new ForceVector(0,0);
+		velocity = new VelocityVector(0,0);
 	}
 
 	public Particle(BigDecimal inMass, Vector inPosition) {
@@ -33,8 +36,8 @@ public class Particle {
 		return position;
 	}
 
-	public BigDecimal velocity() {
-		return BigDecimal.ZERO;
+	public VelocityVector velocity() {
+		return velocity;
 	}
 
 	public BigDecimal charge() {
@@ -55,5 +58,9 @@ public class Particle {
 
 	public void addForce(ForceVector inForce) {
 		force.add(inForce);
+	}
+
+	public void accelerateFor(BigDecimal testTime) {
+		 velocity = velocity.accelerate(acceleration(), testTime);
 	}
 }
