@@ -2,31 +2,17 @@ package structures;
 
 import java.math.BigDecimal;
 
-public class CartesianPosition {
-
-	private BigDecimal xcoord;
-	private BigDecimal ycoord;
+public class CartesianPosition extends Vector {
 
 	public CartesianPosition(BigDecimal x, BigDecimal y) {
-		xcoord = x;
-		ycoord = y;
+		super(x,y);
 	}
 
 	public CartesianPosition(double x, double y) {
-		new CartesianPosition(BigDecimal.valueOf(x), BigDecimal.valueOf(y));
+		super(x,y);
 	}
 
-	public BigDecimal x() {
-		return xcoord;
+	public void moveBy(CartesianPosition inVector) {
+		append(inVector);
 	}
-
-	public BigDecimal y() {
-		return ycoord;
-	}
-
-	public void moveBy(CartesianPosition vector) {
-		xcoord.add(vector.x());
-		ycoord.add(vector.y());
-	}
-
 }
