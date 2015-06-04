@@ -2,38 +2,49 @@ package particles;
 
 import java.math.BigDecimal;
 
+import structures.CartesianPosition;
+
 public class Particle {
 
-	public BigDecimal mass() {
-		// TODO Auto-generated method stub
-		return BigDecimal.ONE;
+	private BigDecimal mass;
+	private CartesianPosition position;
+
+	public Particle(BigDecimal inMass, CartesianPosition inPosition) {
+		mass = inMass;
+		position = inPosition;
 	}
 
-	public BigDecimal position() {
-		// TODO Auto-generated method stub
-		return BigDecimal.ZERO;
+	public Particle() {
+		mass = BigDecimal.ONE;
+		position = new CartesianPosition(0, 0);
+	}
+
+	public BigDecimal mass() {
+		return mass;
+	}
+
+	public CartesianPosition position() {
+		return position;
 	}
 
 	public BigDecimal velocity() {
-		// TODO Auto-generated method stub
 		return BigDecimal.ZERO;
 	}
 
 	public BigDecimal charge() {
-		// TODO Auto-generated method stub
 		return BigDecimal.ZERO;
 	}
 
 	public BigDecimal forces() {
-		// TODO Auto-generated method stub
 		return BigDecimal.ZERO;
 	}
 
 	public BigDecimal acceleration() {
-		// TODO Auto-generated method stub
 		return BigDecimal.ZERO;
 	}
 
-	
+	public void setMass(BigDecimal inMass) {
+		mass = inMass;
+	}
 	
 }
