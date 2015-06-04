@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 import structures.AccelerationVector;
 import structures.CartesianPosition;
 import structures.ForceVector;
-import structures.Vector;
 import structures.VelocityVector;
 
 public class Particle {
@@ -14,12 +13,14 @@ public class Particle {
 	private CartesianPosition position;
 	private ForceVector force;
 	private VelocityVector velocity;
+	private BigDecimal charge;
 
 	public Particle() {
 		mass = BigDecimal.ONE;
 		position = new CartesianPosition(0, 0);
-		force = new ForceVector(0,0);
+		resetForces();
 		velocity = new VelocityVector(0,0);
+		charge =  BigDecimal.valueOf(0);
 	}
 
 	public Particle(BigDecimal inMass, CartesianPosition inPosition) {
@@ -41,7 +42,11 @@ public class Particle {
 	}
 
 	public BigDecimal charge() {
-		return BigDecimal.ZERO;
+		return charge;
+	}
+	
+	public void setCharge(BigDecimal inCharge){
+		charge = inCharge;
 	}
 
 	public ForceVector forces() {
@@ -60,16 +65,17 @@ public class Particle {
 		force.add(inForce);
 	}
 
-	public void increaseVelocityFor(BigDecimal testTime) {
-		 velocity = velocity.accelerate(acceleration(), testTime);
-	}
-
-	public void moveFor(BigDecimal testTime) {
-		
+	public void accelerateFor(BigDecimal testTime){
+		velocity = velocity.accelerate(acceleration(), testTime);
 		BigDecimal xmove = velocity.x().multiply(testTime).multiply(BigDecimal.valueOf(0.5));
 		BigDecimal ymove = velocity.y().multiply(testTime).multiply(BigDecimal.valueOf(0.5));
-		CartesianPosition moveBy = new CartesianPosition(xmove, ymove);
+		CartesianPosition moveByVector = new CartesianPosition(xmove, ymove);
 			
-		position.moveBy(moveBy);
+		position.moveBy(moveByVector);	
+		resetForces();
+	}
+	
+	private void resetForces(){
+		force = new ForceVector(0,0);
 	}
 }

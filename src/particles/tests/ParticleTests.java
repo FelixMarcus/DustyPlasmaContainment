@@ -66,29 +66,31 @@ public class ParticleTests {
 	}
 	
 	@Test
-	public void testParticleVelocity(){
-		ForceVector testForce = new ForceVector(5, 5);
-		BigDecimal testTime = BigDecimal.valueOf(1);
-		VelocityVector testVelocity = new VelocityVector(5, 5);
-		
-		particle.addForce(testForce);
-		particle.increaseVelocityFor(testTime);
-		
-		assertEquals(testVelocity, particle.velocity());
-	}
-	
-	@Test
 	public void testMoveParticle(){
 		ForceVector testForce = new ForceVector(5, 5);
 		BigDecimal testTime = BigDecimal.valueOf(1);
 		CartesianPosition testFinalPosition = new CartesianPosition(BigDecimal.valueOf(2.500), BigDecimal.valueOf(2.500));
 		
 		particle.addForce(testForce);
-		particle.increaseVelocityFor(testTime);
-		particle.moveFor(testTime);
-		
-		System.out.println(particle.position().x());
-		
+		particle.accelerateFor(testTime);
+				
 		assertEquals(testFinalPosition, particle.position());
+	}
+	
+	@Test
+	public void testForcesReset(){
+		ForceVector testForce = new ForceVector(5, 5);
+		BigDecimal testTime = BigDecimal.valueOf(1);
+		
+		particle.addForce(testForce);
+		particle.accelerateFor(testTime);
+				
+		assertEquals(particle.forces(), new ForceVector(0, 0));
+	}
+	
+	@Test
+	public void testSetCharge(){
+		particle.setCharge(BigDecimal.valueOf(1));
+		assertEquals(BigDecimal.valueOf(1), particle.charge());
 	}
 }
