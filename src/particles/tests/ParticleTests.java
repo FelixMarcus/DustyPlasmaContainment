@@ -16,5 +16,8 @@ public class ParticleTests {
 		assertEquals(particle.mass(), BigDecimal.valueOf(1));
 		assertEquals(particle.position(), BigDecimal.valueOf(0));
 		assertEquals(particle.velocity(), BigDecimal.valueOf(0));
+		assertEquals(particle.charge(), BigDecimal.valueOf(0));
+		assertEquals(particle.forces(), BigDecimal.valueOf(0));
+		assertEquals(particle.acceleration(), BigDecimal.valueOf(0));
 	}
 }

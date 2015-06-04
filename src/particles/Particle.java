@@ -19,5 +19,21 @@ public class Particle {
 		return BigDecimal.ZERO;
 	}
 
+	public BigDecimal charge() {
+		// TODO Auto-generated method stub
+		return BigDecimal.ZERO;
+	}
+
+	public BigDecimal forces() {
+		// TODO Auto-generated method stub
+		return BigDecimal.ZERO;
+	}
+
+	public BigDecimal acceleration() {
+		// TODO Auto-generated method stub
+		return BigDecimal.ZERO;
+	}
+
+	
 	
 }
