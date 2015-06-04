@@ -11,7 +11,6 @@ import particles.Particle;
 import structures.AccelerationVector;
 import structures.CartesianPosition;
 import structures.ForceVector;
-import structures.Vector;
 import structures.VelocityVector;
 
 public class ParticleTests {
@@ -43,7 +42,7 @@ public class ParticleTests {
 	@Test
 	public void testParticleConstructorWithMassAndPosition(){
 		BigDecimal testMass = BigDecimal.valueOf(5);
-		Vector testPos = new CartesianPosition(5,5);
+		CartesianPosition testPos = new CartesianPosition(5,5);
 		particle = new Particle(testMass, testPos);
 		
 		assertEquals(particle.mass(), testMass);
@@ -73,8 +72,23 @@ public class ParticleTests {
 		VelocityVector testVelocity = new VelocityVector(5, 5);
 		
 		particle.addForce(testForce);
-		particle.accelerateFor(testTime);
+		particle.increaseVelocityFor(testTime);
 		
 		assertEquals(testVelocity, particle.velocity());
+	}
+	
+	@Test
+	public void testMoveParticle(){
+		ForceVector testForce = new ForceVector(5, 5);
+		BigDecimal testTime = BigDecimal.valueOf(1);
+		CartesianPosition testFinalPosition = new CartesianPosition(BigDecimal.valueOf(2.500), BigDecimal.valueOf(2.500));
+		
+		particle.addForce(testForce);
+		particle.increaseVelocityFor(testTime);
+		particle.moveFor(testTime);
+		
+		System.out.println(particle.position().x());
+		
+		assertEquals(testFinalPosition, particle.position());
 	}
 }

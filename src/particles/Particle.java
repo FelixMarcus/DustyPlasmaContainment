@@ -11,7 +11,7 @@ import structures.VelocityVector;
 public class Particle {
 
 	private BigDecimal mass;
-	private Vector position;
+	private CartesianPosition position;
 	private ForceVector force;
 	private VelocityVector velocity;
 
@@ -22,7 +22,7 @@ public class Particle {
 		velocity = new VelocityVector(0,0);
 	}
 
-	public Particle(BigDecimal inMass, Vector inPosition) {
+	public Particle(BigDecimal inMass, CartesianPosition inPosition) {
 		this();
 		mass = inMass;
 		position = inPosition;
@@ -32,7 +32,7 @@ public class Particle {
 		return mass;
 	}
 
-	public Vector position() {
+	public CartesianPosition position() {
 		return position;
 	}
 
@@ -60,7 +60,16 @@ public class Particle {
 		force.add(inForce);
 	}
 
-	public void accelerateFor(BigDecimal testTime) {
+	public void increaseVelocityFor(BigDecimal testTime) {
 		 velocity = velocity.accelerate(acceleration(), testTime);
+	}
+
+	public void moveFor(BigDecimal testTime) {
+		
+		BigDecimal xmove = velocity.x().multiply(testTime).multiply(BigDecimal.valueOf(0.5));
+		BigDecimal ymove = velocity.y().multiply(testTime).multiply(BigDecimal.valueOf(0.5));
+		CartesianPosition moveBy = new CartesianPosition(xmove, ymove);
+			
+		position.moveBy(moveBy);
 	}
 }

@@ -50,12 +50,12 @@ public abstract class Vector {
 		if (xcoord == null) {
 			if (other.xcoord != null)
 				return false;
-		} else if (!xcoord.equals(other.xcoord))
+		} else if (xcoord.compareTo(other.xcoord) != 0)
 			return false;
 		if (ycoord == null) {
 			if (other.ycoord != null)
 				return false;
-		} else if (!ycoord.equals(other.ycoord))
+		} else if (ycoord.compareTo(other.ycoord) != 0)
 			return false;
 		return true;
 	}
